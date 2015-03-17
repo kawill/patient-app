@@ -1,5 +1,6 @@
 @import "../bower_components/normalize-scss/_normalize.scss";
 @import "../bower_components/typeplate-starter-kit/css/_typeplate.scss";
+@import "../bower_components/font-awesome/css/font-awesome.min.css";
 @import "./mixins.scss";
 
 /**
@@ -77,4 +78,12 @@ img {max-width:100%;}
 
 body {
     transition: opacity .25s ease;
+}
+
+/**
+ * SPECFIC
+ */
+
+.button {
+
 }
