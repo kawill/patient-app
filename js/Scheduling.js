@@ -9,7 +9,7 @@
 
             this.model = new Parse.Session();
             // this.object = new Parse.Session();
-            this.view = new Parse.HomeView ({
+            this.homeView = new Parse.HomeView ({
                 model: this.object
             });
             this.apptRequestView = new Parse.ApptRequestView();
@@ -24,7 +24,7 @@
             "schedule": "schedule",
             "notes": "notes",
             "login": "login",
-            "patienthome": "patienthome",
+            "dashboard": "patienthome",
             "*default": "home"
         },
         apptrequest: function(){
@@ -43,7 +43,7 @@
             this.patientHomeView.render();
         },
         home: function() {
-            this.view.render();
+            this.homeView.render();
         }
     })
 
@@ -54,9 +54,24 @@
         }
     })
 
+    Parse.Appointment = Parse.Object.extend({
+        className: "appointment",
+        defaults: {
+            date: new Date("Jan 1 1970"),
+            description: "",
+            notes: "",
+            user: null,
+            occurred: false
+        }
+    })
+
+    Parse.AppointmentCollection = Parse.Collection.extend({
+        model: Parse.Appointment
+    })
+
     Parse.ApptRequestView = Parse.TemplateView.extend({
-        el: ".container",
-        view: "apptrequest"
+        el: ".wrapper",
+        view: "bootstrap-apptrequest"
         // events: {
         //     "submit .schedulebtn":"schedulebtn"
         // },
@@ -69,18 +84,18 @@
     })
 
     Parse.ScheduleView = Parse.TemplateView.extend({
-        el: ".container",
+        el: ".wrapper",
         view: "schedule"
     })
 
     Parse.NotesView = Parse.TemplateView.extend({
-        el: ".container",
+        el: ".wrapper",
         view: "notes"
     })
 
     Parse.LoginView = Parse.TemplateView.extend({
-        el: ".container",
-        view: "patient-login",
+        el: ".wrapper",
+        view: "bootstrap-patient-login",
         events: {
             "submit .patientLogin": "login",
             "submit .patientRegister": "register"
@@ -93,7 +108,7 @@
             }
             var result = Parse.User.logIn(data.username, data.password); //documentation logIn vs login
             result.then(function(){
-                window.location.hash = "#patienthome"
+                window.location.hash = "#dashboard"
             })
         },
         register: function(event){
@@ -112,19 +127,51 @@
             // var result = user.registered() documentation?
             var result = user.signUp()
             result.then(function(user){
-                window.location.hash = "#patienthome"
+                window.location.hash = "#dashboard"
             })
         }
     })
 
     Parse.PatientHomeView = Parse.TemplateView.extend({
-        el: ".container",
-        view: "patient-home"
+        el: ".wrapper",
+        view: "bootstrap-patient-home",
+        events: {
+            "submit .scheduleappt": "scheduleappt"
+        },
+        scheduleappt: function(event){
+            event.preventDefault();
+
+        }
     })
 
     Parse.HomeView = Parse.TemplateView.extend({
-        el: ".container",
-        view: "home"
+        el: ".wrapper",
+        view: "bootstrap-home"
     })
+
+    window.testData = function(){
+        var loggedInUser = Parse.User.current()
+        var testAppointment = new Parse.Appointment({
+            date: new Date("March 27, 2015 9:00:00"),
+            description: "upper respiratory..."
+        })
+        var acl = new Parse.ACL(loggedInUser);
+        testAppointment.setACL(acl);
+        testAppointment.save();
+    }
+
+    window.findModelWithID = function(id){
+        var appt = new Parse.Appointment({id: id})
+        appt.fetch().then(function(){
+            console.log(appt)
+        })
+    }
+
+    window.testPullingData = function(){
+        var appointments = new Parse.AppointmentCollection();
+        appointments.fetch().then(function(){
+            console.log(appointments)
+        })
+    }
 
 })(typeof module === "object" ? module.exports : window)

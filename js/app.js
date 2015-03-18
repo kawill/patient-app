@@ -15,6 +15,7 @@ function app(){
         //js
         {url: "./bower_components/jquery/dist/jquery.min.js"},
         {url: "./bower_components/lodash/lodash.min.js"},
+        {url: "./bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.min.js"},
 
         // when using just Backbone, use this line
         // {url: "./bower_components/backbone/backbone.js"},

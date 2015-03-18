@@ -1,0 +1,73 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">CliniSchedule</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">Home</a></li>
+                <li><a href="#login">Log In</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#faq">FAQ</a></li>
+            </ul>
+        </div>
+        <!--/.navbar-collapse -->
+    </div>
+</nav>
+
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<div class="jumbotron">
+    <div class="container-fluid patient-Login">
+        <p>Log in with your email:</p>
+        <form class="horizontal-form patientLogin">
+            <div class="form-group">
+                <input type="text" placeholder="Email" class="form-control" name="email" required>
+            </div>
+            <div class="form-group">
+                <input type="password" name="password" required placeholder="Password" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-success">Sign In</button>
+        </form>
+    </div>
+
+    <hr>
+
+    <div class="container-fluid patient-Login">
+        <p>If you do not have an account, please register here:</p>
+        <form class="horizontal-form patientRegister">
+            <div class="form-group">
+                <input type="text" placeholder="Email" class="form-control" name="email" required>
+            </div>
+            <div class="form-group">
+                <input type="password" name="password" required placeholder="Password" class="form-control">
+            </div>
+            <div class="form-group">
+                <input type="password" name="passwordrepeat" required placeholder="Repeat password" class="form-control">
+            </div>
+            <div class="form-group">
+                <input type="text" name="firstname" required placeholder="First Name" class="form-control">
+            </div>
+            <div class="form-group">
+                <input type="text" name="lastname" required placeholder="Last Name" class="form-control">
+            </div>
+            <div class="form-group">
+                <label>Enter Date of Birth:</label>
+                <input type="date" name="dob" required class="form-control">
+            </div>
+            <button type="submit" class="btn btn-success">Register</button>
+        </form>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <footer>
+        <p>© CliniSchedule 2015</p>
+    </footer>
+</div>
+<!-- /container-fluid -->
