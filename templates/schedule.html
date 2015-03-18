@@ -7,36 +7,43 @@
         </li>
         <li><a href="#notes">NOTES</a>
         </li>
+        <li><a href="#logout">LOG OUT</a>
+        </li>
     </ul>
 </div>
 
 <form class="schedule">
     <div>
-        <input type="text">
+        <input type="date" name="date">
+        <script type="text/javascript">
+        document.getElementById('date').value = (new Date()).format("mm/dd/yyyy");
+        </script>
+    </div>
+    <div>
+        <input type="text" placeholder="9AM">
         <button>SELECT</button>
     </div>
     <div>
-        <input type="text">
+        <input type="text" placeholder="10AM">
         <button>SELECT</button>
     </div>
     <div>
-        <input type="text">
+        <input type="text" placeholder="11AM">
         <button>SELECT</button>
     </div>
     <div>
-        <input type="text">
+        <p>LUNCH</p>
+    </div>
+    <div>
+        <input type="text" placeholder="1PM">
         <button>SELECT</button>
     </div>
     <div>
-        <input type="text">
+        <input type="text" placeholder="2PM">
         <button>SELECT</button>
     </div>
     <div>
-        <input type="text">
-        <button>SELECT</button>
-    </div>
-    <div>
-        <input type="text">
+        <input type="text" placeholder="3PM">
         <button>SELECT</button>
     </div>
 </form>

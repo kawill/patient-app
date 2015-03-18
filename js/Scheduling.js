@@ -12,14 +12,29 @@
             this.view = new Parse.HomeView ({
                 model: this.object
             });
+            this.apptRequestView = new Parse.ApptRequestView();
+            this.scheduleView = new Parse.ScheduleView();
+            this.notesView = new Parse.NotesView();
             this.loginView = new Parse.LoginView();
             this.patientHomeView = new Parse.PatientHomeView();
             Parse.history.start();
         },
         routes: {
+            "apptrequest": "apptrequest",
+            "schedule": "schedule",
+            "notes": "notes",
             "login": "login",
             "patienthome": "patienthome",
             "*default": "home"
+        },
+        apptrequest: function(){
+            this.apptRequestView.render();
+        },
+        schedule: function(){
+            this.scheduleView.render();
+        },
+        notes: function(){
+            this.notesView.render();
         },
         login: function(){
             this.loginView.render();
@@ -39,6 +54,30 @@
         }
     })
 
+    Parse.ApptRequestView = Parse.TemplateView.extend({
+        el: ".container",
+        view: "apptrequest",
+        events: {
+            "submit .schedulebtn":"schedulebtn"
+        },
+        schedulebtn: function(event){
+            var self=this;
+            event.preventDefault();
+            window.location.hash = "#schedule";
+            // this.scheduleView.render();
+        }
+    })
+
+    Parse.ScheduleView = Parse.TemplateView.extend({
+        el: ".container",
+        view: "schedule"
+    })
+
+    Parse.NotesView = Parse.TemplateView.extend({
+        el: ".container",
+        view: "notes"
+    })
+
     Parse.LoginView = Parse.TemplateView.extend({
         el: ".container",
         view: "patient-login",
@@ -50,9 +89,9 @@
             event.preventDefault();
             var data = {
                 username: this.el.querySelector(".patientLogin input[name='email']").value,
-                password: this.el.querySelector(".patientLogin input[password='password']").value
+                password: this.el.querySelector(".patientLogin input[name='password']").value
             }
-            var result = Parse.User.login(data.username, data.password);
+            var result = Parse.User.logIn(data.username, data.password); //documentation logIn vs login
             result.then(function(){
                 window.location.hash = "#patienthome"
             })
