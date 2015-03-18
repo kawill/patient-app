@@ -56,16 +56,16 @@
 
     Parse.ApptRequestView = Parse.TemplateView.extend({
         el: ".container",
-        view: "apptrequest",
-        events: {
-            "submit .schedulebtn":"schedulebtn"
-        },
-        schedulebtn: function(event){
-            var self=this;
-            event.preventDefault();
-            window.location.hash = "#schedule";
-            // this.scheduleView.render();
-        }
+        view: "apptrequest"
+        // events: {
+        //     "submit .schedulebtn":"schedulebtn"
+        // },
+        // schedulebtn: function(event){
+        //     var self=this;
+        //     event.preventDefault();
+        //     window.location.hash = "#schedule";
+        //     // this.scheduleView.render();
+        // }
     })
 
     Parse.ScheduleView = Parse.TemplateView.extend({
