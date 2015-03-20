@@ -28,17 +28,16 @@
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-xs-12">
-            <form class="horizontal-form">
-            <label>Enter Date You Would Like to be Seen:</label>
-            <input type="date" name="apptdate" required class="form-control">
-            <textarea placeholder="Comment on your concerns"></textarea>
-
-
-            <hr>
-
-            <p><a class="btn bt-default btn-large btn-success sendrequest" href="#dashboard">SEND</a>
-            </p>
+        <div class="col-xs-6">
+            <form class="horizontal-form sendrequest">
+                <label>Enter Date You Would Like to be Seen:</label>
+                <input type="date" name="apptdate" required class="form-control">
+                <br>
+                <textarea class="col-xs-12" placeholder="Comment on your concerns" name="concerns"></textarea>
+                <br>
+                <hr>
+                <p><button type ="submit" class="btn bt-default btn-large btn-success sendrequestbtn" href="#dashboard">SEND</button>
+                </p>
             </form>
         </div>
 
