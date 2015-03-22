@@ -33,6 +33,10 @@
             "*default": "home"
         },
         apptrequest: function() {
+            // var query = new Parse.Query(Parse.Appointment);
+            // query.equalTo("user", this.user);
+            // this.collection.query = query;
+            // this.collection.fetch();
             this.apptRequestView.render();
         },
         schedule: function() {
@@ -71,6 +75,7 @@
             // date: new Date("Jan 1 1970"),
             date: new Date(1970, 0, 0),
             description: "",
+            id: "",
             notes: "",
             user: null,
             occurred: false
@@ -96,75 +101,68 @@
         },
         showappt: function(event) {
             event.preventDefault();
-            console.log(event);
+            // console.log(event);
 
-            console.log(this.el.querySelector(".sendrequest input[name='apptdate']").value);
-            // HTML gives date as a string ie 2015-03-25 to JS
+            // console.log(this.el.querySelector(".sendrequest input[name='apptdate']").value);
+            // line above: HTML gives date as a string ie 2015-03-25 to JS
             var dateString = this.el.querySelector(".sendrequest input[name='apptdate']").value;
-            // split the string into an array of strings that removes and splits at the dash
+
             var dateArrayStrings = dateString.split("-");
-            // will give ["2015", "03", "25"]
-            console.log(dateArrayStrings);
+            // line above split the string into an array of strings that removes and splits at the dash
+            // will convert 2015-03-25 to ["2015", "03", "25"]
+            // console.log(dateArrayStrings);
 
-            var dateArrayNumbers = dateArrayStrings.map(function(numberString, index){
+            var dateArrayNumbers = dateArrayStrings.map(function(numberString, index) {
                 console.log(parseInt(numberString));
+                // .map convert this array (of strings) into a new array (of numbers)
                 // parseInt() converts string to number
-                // line 110 prints each string ["2015", "03", "25"] as a number: 2015 3 25
-                var num;
-                index === 0 ? num = parseInt(numberString) : num = parseInt(numberString) - 1
-                // if the index
-                return num
-            })
+                // prints each string ["2015", "03", "25"] as a number: 2015 3 25, .map puts it in array [2015 3 25]
+                var num = numberString;
+                index === 0 || index === 2 ? num = parseInt(numberString) : num = parseInt(numberString) - 1;
+                // if the index of the string is 0 or 2 convert that string to the number
+                // if the index of the string is not 0 or 2 convert that string to a number and subtract 1
+                // substract 1 because the the number representing month begins at an index of 0
+                return num;
+            });
 
-            console.log(dateArrayNumbers)
+            // console.log(dateArrayNumbers);
 
             var loggedInUser = Parse.User.current();
             var acl = new Parse.ACL(loggedInUser);
             var appointment = new Parse.Appointment({
-                    date:  new Date(dateArrayNumbers[0], dateArrayNumbers[1], dateArrayNumbers[2]) ,
-                    description: this.el.querySelector(".sendrequest textarea[name='concerns']").value
-                });
-
-
-            console.log(appointment);
-            appointment.setACL(acl);
-            appointment.save().then(function(data){
-                console.log(data);
-                console.log('save successful');
+                date: new Date(dateArrayNumbers[0], dateArrayNumbers[1], dateArrayNumbers[2]),
+                description: this.el.querySelector(".sendrequest textarea[name='concerns']").value
             });
 
+
+            console.log(appointment); //same as console.log(data) below
+            appointment.setACL(acl);
+            appointment.save().then(function(data) {
+                console.log(data); //same as console.log(appointment) above
+                console.log('save successful');
+                alert("Appointment Request Submitted");
+            });
+
+            var appt = new Parse.Appointment({
+                id: id
+            });
+            appt.fetch().then(function() {
+                console.log(appt);
+            });
+
+            // var appt = new Parse.Appointment({
+            //     id: id
+            // });
+            // appt.fetch().then(function() {
+            //     console.log(appt);
+            // });
+
+
+            var appointments = new Parse.AppointmentCollection();
+            appointments.fetch().then(function() {
+                console.log(appointments);
+            });
         }
-
-        //     event.findModelWithID = function(id) {
-        //         var appt = new Parse.Appointment({
-        //             id: id
-        //         })
-        //         appt.fetch().then(function() {
-        //             console.log(appt)
-        //         })
-        //     }
-
-        //     event.pullData = function() {
-        //             var appointments = new Parse.AppointmentCollection();
-        //             appointments.fetch().then(function() {
-        //                 console.log(appointments)
-        //             })
-        //         }
-        // var data = {
-        //     description: this.el.querySelector('textarea').value,
-        //     user: Parse.User.current()
-        //     // id: id
-        // }
-        // var appointment = new Parse.Appointment(data);
-        // var acl = new Parse.ACL(Parse.User.current());
-        // var self = this;
-        // appointment.setACL(acl);
-        // appointment.save().then(function() {
-        //     alert("appointment request submitted");
-        //     self.collection.fetch()
-        // });
-        // console.log(data);
-        // }
     })
 
     Parse.ScheduleView = Parse.TemplateView.extend({
