@@ -19,13 +19,11 @@
                 </li>
                 <li><a href="#logout">Log Out</a>
                 </li>
-
             </ul>
         </div>
         <!--/.navbar-collapse -->
     </div>
 </nav>
-
 <div class="container-fluid">
     <div class="row">
         <div class="col-xs-6">
@@ -33,35 +31,39 @@
                 <label>Enter Date You Would Like to be Seen:</label>
                 <input type="date" name="apptdate" required class="form-control">
                 <br>
-                <textarea class="col-xs-12" placeholder="Comment on your concerns" name="concerns"></textarea>
+                <textarea class="col-xs-12" placeholder="Enter Reason for Visit" name="concerns"></textarea>
                 <br>
                 <hr>
-                <p><button type ="submit" class="btn bt-default btn-large btn-success sendrequestbtn" href="#dashboard">SEND</button>
+                <p>
+                    <button type="submit" class="btn bt-default btn-large btn-success sendrequestbtn" href="#dashboard">SEND</button>
                 </p>
             </form>
         </div>
-
         <div class="col-xs-6">
             <h2>Appointments</h2>
             <hr>
             <ul class="listofappts">
-
-                <li><a href="#schedule/id">Appt with Dr. Markov, 10am March 27th 2015</a></li>
-                <li><a href="#schedule/id">Appt with Dr. Markov, 10am March 27th 2015</a></li>
-                <li><a href="#schedule/id">Appt with Dr. Markov, 10am March 27th 2015</a></li>
-                <li><a href="#schedule/id">Appt with Dr. Markov, 10am March 27th 2015</a></li>
-                <li><a href="#schedule/id">Appt with Dr. Markov, 10am March 27th 2015</a></li>
+                <% data.models.forEach(function(appointments){ %>
+                    <div class="<%= appointments.id %>">
+                            <div>
+                            Date of Visit: <%=appointments.get('dateReadable') %>
+                            </div>
+                            <div>
+                            Reason for Visit: <%=appointments.get('description') %>
+                            </div>
+                            <div>
+                                <p><a href="#notes/<%= appointments.id%>">see or make personal notes...</a></p>
+                            </div>
+                    </div>
+                    <hr>
+                <%})%>
             </ul>
         </div>
-
     </div>
 </div>
-
 <div class="container-fluid">
     <!-- Example row of columns -->
-
     <hr>
-
     <footer>
         <p>© CliniSchedule 2015</p>
     </footer>

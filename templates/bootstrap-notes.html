@@ -11,10 +11,14 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#dashboard">Dashboard</a></li>
-                <li><a href="#apptrequest">Schedule Appointments</a></li>
-                <li><a href="#notes">Notes</a></li>
-                <li><a href="#logout">Log Out</a></li>
+                <li><a href="#dashboard">Dashboard</a>
+                </li>
+                <li><a href="#apptrequest">Schedule Appointments</a>
+                </li>
+                <li><a href="#notes">Notes</a>
+                </li>
+                <li><a href="#logout">Log Out</a>
+                </li>
             </ul>
         </div>
         <!--/.navbar-collapse -->
@@ -23,31 +27,58 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-xs-6">
-            <h2>Appointments</h2>
-            <hr>
-            <p><a class="btn bt-default btn-large btn-success scheduleappt" href="#apptrequest">Schedule New Appt</a></p>
-            <ul class="listofappts">
-                <% console.log(data)%>
-                <% data.models.forEach(function(appointments){ %>
-                    <div class="<%= appointments.id %>">
+            <div>
+                        <% data.models.forEach(function(notes){ %>
+                            <div class="<%= notes.id %>">
                             <div>
-                            Date of Visit: <%=appointments.get('dateReadable') %>
+                            Date of Visit: <%=notes.get('dateReadable') %>
                             </div>
                             <div>
-                            Reason for Visit: <%=appointments.get('description') %>
+                            Reason for Visit: <%=notes.get('description')%>
                             </div>
-                            <div>
-                                <p><a href="#notes/<%= appointments.id%>">see or make personal notes...</a></p>
                             </div>
-                    </div>
+                        <%})%>
+            </div>
+            <form class="horizontal-form savingpersonalnotes">
+                <textarea class="col-xs-12" placeholder="Enter Your Notes" name="visitnotes"></textarea>
+                <br>
+                <hr>
+                <p>
+                    <button type="submit" class="btn bt-default btn-large btn-success savepersonalnotes">SAVE</button>
+                </p>
+                </form>
+                <br>
+                <hr>
+                <div class="col-xs-12" name="mdnotesonnotespg">
+                    <h4>Doctor's Notes</h4>
                     <hr>
-                <%})%>
-            </ul>
+                    <ul>
+                        <% data.models.forEach(function(notes){ %>
+                            <div class="<%= notes.id %>">
+                            <%=notes.get('doctorNotes') %>
+                            </div>
+                        <%})%>
+                    </ul>
+                </div>
+                <br>
+                <hr>
+                <div class="col-xs-12" name="personalsavednotes">
+                    <h4>Saved Personal Notes</h4>
+                    <ul>
+                        <% data.models.forEach(function(notes){ %>
+                            <div class="<%= notes.id %>">
+                            <%=notes.get('notes') %>
+                            </div>
+                        <%})%>
+                    </ul>
+                </div>
+                <br>
+                <hr>
         </div>
         <div class="col-xs-6">
             <h2>Notes</h2>
             <hr>
-            <ul class="homenotes">
+            <ul class="onnotespage">
                 <% console.log(data)%>
                 <% data.models.forEach(function(notes){ %>
                     <div class="<%= notes.id %>">
