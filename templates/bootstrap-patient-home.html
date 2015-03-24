@@ -7,7 +7,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">CliniSchedule</a>
+            <a class="navbar-brand" href="#">CliniScheduler</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
@@ -25,19 +25,19 @@
         <div class="col-xs-6">
             <h2>Appointments</h2>
             <hr>
-            <p><a class="btn bt-default btn-large btn-success scheduleappt" href="#apptrequest">Schedule New Appt</a></p>
+            <p><a class="btn bt-default btn-large btn-success scheduleappt" href="#apptrequest">Schedule New Appointment</a></p>
             <ul class="listofappts">
-                <% console.log(data)%>
-                <% data.models.forEach(function(appointments){ %>
-                    <div class="<%= appointments.id %>">
+
+                <% data.models.forEach(function(appt){ %>
+                    <div data-appt="<%= appt.id %>">
                             <div>
-                            Date of Visit: <%=appointments.get('dateReadable') %>
+                            Date of Visit: <%= appt.get('dateReadable') %>
                             </div>
                             <div>
-                            Reason for Visit: <%=appointments.get('description') %>
+                            Reason for Visit: <%= appt.get('description') %>
                             </div>
                             <div>
-                                <p><a href="#notes/<%= appointments.id%>">see or make personal notes...</a></p>
+                                <p><a href="#notes/<%= appt.id %>" >see or make personal notes...</a></p>
                             </div>
                     </div>
                     <hr>
@@ -48,10 +48,10 @@
             <h2>Notes</h2>
             <hr>
             <ul class="homenotes">
-                <% console.log(data)%>
+
                 <% data.models.forEach(function(notes){ %>
-                    <div class="<%= notes.id %>">
-                            <%console.log(notes.get('doctorNotes'))%>
+                    <div data-notes="<%= notes.id %>">
+
                             <%if(!notes.get('doctorNotes')){return} else{%>
                             <div>
                             Date of Visit: <%=notes.get('dateReadable')%>
@@ -63,7 +63,7 @@
                             Dr.'s Notes: <%=notes.get('doctorNotes')%>
                             </div>
                             <div>
-                                <p><a href="#notes/<%= notes.id%>">more info...</a></p>
+                                <p><a>more info...</a></p>
                             </div>
                     </div>
                     <hr>
@@ -78,7 +78,7 @@
     <!-- Example row of columns -->
     <hr>
     <footer>
-        <p>© CliniSchedule 2015</p>
+        <p>© CliniScheduler 2015</p>
     </footer>
 </div>
 <!-- /container-fluid -->

@@ -18,8 +18,6 @@
             });
             this.patientHomeView = new Parse.PatientHomeView({
                 collection: this.appointments
-                // collection: this.collection
-                // collection: Parse.AppointmentCollection
             });
             this.notes = new Parse.NotesCollection();
             // Parse.NotesCollection has model: Parse.Appointment
@@ -37,19 +35,15 @@
             "apptrequest": "loadApptrequest",
             "schedule": "schedule",
             "notes": "notes",
-            "notes/:id": "loadVistNotes",
+            // "dashboard/*notes/:noteId": "loadVistNotes",
+            // "dashboard/:id/notes/:noteId": "loadVistNotes",
+            "notes/:noteId": "loadVistNotes",
             "login": "login",
-            //"dashboard/:patientId": "loadPatientDashboard"
-            "dashboard": "patienthome",
+            // "dashboard/:id": "patienthome",
+            "dashboard" : "patienthome",
             "*default": "home"
         },
         loadApptrequest: function() {
-            // var query = new Parse.Query(Parse.Appointment);
-            // query.equalTo("user", this.user);
-            // Parse.AppointmentCollection.query = query;
-            // Parse.AppointmentCollection.fetch();
-            // this.collection.query = query;
-            // this.collection.fetch();
             var self = this;
             // self = router
             this.appointments.fetch().then(function(collectionResult) {
@@ -59,49 +53,37 @@
                 // self because it needs to be a part of this model, new function
             });
         },
-        // loadTodaysAppointents: function(){
-
-        //     var today = new Date();
-
-        //     var pQuery = new Parse.Query(Parse.Appointment)
-        //     pQuery.equalTo('date', today)
-
-        //     pQuery.find().then(function(result){
-        //         var todaysAppointments = result
-
-        //         self.apptRequestView.collection = todaysAppointments;
-        //         self.apptRequestView.render()
-
-
-        //     });
-        // },
         schedule: function() {
             this.scheduleView.render();
         },
         notes: function() {
             this.notesView.render();
         },
-        loadVistNotes: function() {
+        loadVistNotes: function(noteId) { //userId, noteId
+            console.log(noteId+" passed to handler");
+            // userId/notes passed not userId/notes/specific_noteId
             var self = this;
             // self = router
-            this.appointments.fetch().then(function(collectionResult) {
-                // the result should be a Parse.Collection, hopefully
-                self.patientNotesView.collection = collectionResult;
+            // this.appointments.fetch(noteId).then(function(collectionResult) {
+            //     // the result should be a Parse.Collection, hopefully
+            //     self.patientNotesView.collection = collectionResult;
+            //     self.patientNotesView.render();
+            //     // self because it needs to be a part of this model, new function
+            // });
+
+            // instead... maybe?
+            var model = new Parse.Appointment({ id: noteId });
+            console.log(model);
+            model.fetch().then(function(){
+                self.patientNotesView.model = model;
                 self.patientNotesView.render();
-                // self because it needs to be a part of this model, new function
             });
-            // this.patientNotesView.render();
         },
+
         login: function() {
             this.loginView.render();
         },
         patienthome: function() {
-            // var query = new Parse.Query(Parse.Appointment);
-            // query.equalTo("user", this.user);
-            // Parse.AppointmentCollection.query = query;
-            // Parse.AppointmentCollection.fetch();
-            // this.collection.query = query;
-            // this.collection.fetch();
             var self = this;
             // self = router
             this.appointments.fetch().then(function(collectionResult) {
@@ -110,7 +92,6 @@
                 self.patientHomeView.render();
                 // self because it needs to be a part of this model, new function
             });
-            // this.patientHomeView.render();
         },
         home: function() {
             this.homeView.render();
@@ -181,7 +162,7 @@
             // console.log(dateArrayStrings);
 
             var dateArrayNumbers = dateArrayStrings.map(function(numberString, index) {
-                console.log(parseInt(numberString));
+                // console.log(parseInt(numberString));
                 // .map convert this array (of strings) into a new array (of numbers)
                 // parseInt() converts string to number
                 // prints each string ["2015", "03", "25"] as a number: 2015 3 25, .map puts it in array [2015 3 25]
@@ -222,12 +203,12 @@
             });
 
 
-            console.log(appointment); //same as console.log(data) below
+            // console.log(appointment); //same as console.log(data) below
             appointment.setACL(acl);
             appointment.save().then(function(data) {
-                console.log(data); //same as console.log(appointment) above
+                // console.log(data); //same as console.log(appointment) above
                 // id =appointment.id
-                console.log('save successful');
+                // console.log('save successful');
                 alert("Appointment Request Submitted");
             });
 
@@ -287,8 +268,9 @@
                 password: this.el.querySelector(".patientLogin input[name='password']").value
             }
             var result = Parse.User.logIn(data.username, data.password); //documentation logIn vs login
-            result.then(function() {
-                window.location.hash = "#dashboard"  //   +"/"+this.model.get('id')
+            result.then(function(data) {
+                console.log(data)
+                window.location.hash = "#dashboard" //   +"/"+this.model.get('id')
             })
         },
         register: function(event) {
@@ -307,6 +289,7 @@
             // var result = user.registered() documentation?
             var result = user.signUp()
             result.then(function(user) {
+                // window.location.hash = "#dashboard/" + data.id
                 window.location.hash = "#dashboard"
             })
         }
@@ -314,7 +297,28 @@
 
     Parse.PatientHomeView = Parse.TemplateView.extend({
         el: ".wrapper",
-        view: "bootstrap-patient-home"
+        view: "bootstrap-patient-home",
+        // events: {
+        //     // "click .listofappts a": "triggerApptDateHash",
+        //     // "click .homenotes a": "triggerApptDateHash"
+        // },
+
+        // triggerApptDateHash: function(evt){
+        //     evt.preventDefault();
+        //     console.log(this);
+        //     // collection passed
+        //     var clickedApptModelId = $(evt.target).closest('[data-appt]').attr('data-appt')
+        //     // target for a tag and closest ancestor that has a data-appt attribute and return data-appt value
+        //     console.log(clickedApptModelId);
+        //     // gives ID of model
+        //     var filteredModel = this.collection.models.filter(function(model){
+        //         return model.id === clickedApptModelId
+        //     })
+        //     console.log(filteredModel);
+        //     // gives specific model
+        //     window.location.hash += "/notes/" + clickedApptModelId
+
+        // }
 
     })
 

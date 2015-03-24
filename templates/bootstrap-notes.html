@@ -7,7 +7,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">CliniSchedule</a>
+            <a class="navbar-brand" href="#">CliniScheduler</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
@@ -28,16 +28,16 @@
     <div class="row">
         <div class="col-xs-6">
             <div>
-                        <% data.models.forEach(function(notes){ %>
-                            <div class="<%= notes.id %>">
-                            <div>
-                            Date of Visit: <%=notes.get('dateReadable') %>
-                            </div>
-                            <div>
-                            Reason for Visit: <%=notes.get('description')%>
-                            </div>
-                            </div>
-                        <%})%>
+
+                    <div class="<%= data.id %>">
+                        <div>
+                        Date of Visit: <%=data.attributes.dateReadable %>
+                        </div>
+                        <div>
+                        Reason for Visit: <%= data.attributes.description %>
+                        </div>
+                    </div>
+
             </div>
             <form class="horizontal-form savingpersonalnotes">
                 <textarea class="col-xs-12" placeholder="Enter Your Notes" name="visitnotes"></textarea>
@@ -53,23 +53,25 @@
                     <h4>Doctor's Notes</h4>
                     <hr>
                     <ul>
-                        <% data.models.forEach(function(notes){ %>
-                            <div class="<%= notes.id %>">
-                            <%=notes.get('doctorNotes') %>
+
+                            <div class="<%= data.id %>">
+                            <%= data.attributes.doctorNotes %>
                             </div>
-                        <%})%>
+
                     </ul>
                 </div>
+
                 <br>
                 <hr>
                 <div class="col-xs-12" name="personalsavednotes">
                     <h4>Saved Personal Notes</h4>
+                    <hr>
                     <ul>
-                        <% data.models.forEach(function(notes){ %>
-                            <div class="<%= notes.id %>">
-                            <%=notes.get('notes') %>
+
+                            <div class="<%= data.id %>">
+                            <%=data.attributes.notes %>
                             </div>
-                        <%})%>
+
                     </ul>
                 </div>
                 <br>
@@ -79,27 +81,26 @@
             <h2>Notes</h2>
             <hr>
             <ul class="onnotespage">
-                <% console.log(data)%>
-                <% data.models.forEach(function(notes){ %>
-                    <div class="<%= notes.id %>">
-                            <%console.log(notes.get('doctorNotes'))%>
-                            <%if(!notes.get('doctorNotes')){return} else{%>
-                            <div>
-                            Date of Visit: <%=notes.get('dateReadable')%>
+
+
+                    <div class="<%= data.id %>">
+
+
+                            Date of Visit: <%= data.attributes.dateReadable %>
                             </div>
                             <div>
-                            Reason for Visit: <%=notes.get('description') %>
+                            Reason for Visit: <%= data.attributes.description %>
                             </div>
                             <div>
-                            Dr.'s Notes: <%=notes.get('doctorNotes')%>
+                            Dr.'s Notes: <%=data.attributes.doctorNotes %>
                             </div>
                             <div>
-                                <p><a href="#notes/<%= notes.id%>">more info...</a></p>
+                                <p><a href="#notes/<%= data.id%>">more info...</a></p>
                             </div>
                     </div>
                     <hr>
-                    <%}%>
-                <%})%>
+
+
 
             </ul>
         </div>
@@ -109,7 +110,7 @@
     <!-- Example row of columns -->
     <hr>
     <footer>
-        <p>© CliniSchedule 2015</p>
+        <p>© CliniScheduler 2015</p>
     </footer>
 </div>
 <!-- /container-fluid -->
