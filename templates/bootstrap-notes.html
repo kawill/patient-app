@@ -28,81 +28,52 @@
     <div class="row">
         <div class="col-xs-6">
             <div>
-
-                    <div class="<%= data.id %>">
-                        <div>
+                <div class="<%= data.id %>">
+                    <div>
+                        <h4>
                         Date of Visit: <%=data.attributes.dateReadable %>
-                        </div>
-                        <div>
-                        Reason for Visit: <%= data.attributes.description %>
-                        </div>
+                        </h4>
                     </div>
-
+                    <div>
+                        <h4>
+                        Reason for Visit: <%= data.attributes.description %>
+                        </h4>
+                    </div>
+                </div>
             </div>
+            <hr>
             <form class="horizontal-form savingpersonalnotes">
-                <textarea class="col-xs-12" placeholder="Enter Your Notes" name="visitnotes"></textarea>
+                <textarea class="col-xs-8" placeholder="Enter Your Notes" name="visitnotes"></textarea>
                 <br>
                 <hr>
                 <p>
                     <button type="submit" class="btn bt-default btn-large btn-success savepersonalnotes">SAVE</button>
                 </p>
-                </form>
-                <br>
-                <hr>
-                <div class="col-xs-12" name="mdnotesonnotespg">
-                    <h4>Doctor's Notes</h4>
-                    <hr>
-                    <ul>
+            </form>
 
-                            <div class="<%= data.id %>">
-                            <%= data.attributes.doctorNotes %>
-                            </div>
-
-                    </ul>
-                </div>
-
-                <br>
-                <hr>
-                <div class="col-xs-12" name="personalsavednotes">
-                    <h4>Saved Personal Notes</h4>
-                    <hr>
-                    <ul>
-
-                            <div class="<%= data.id %>">
-                            <%=data.attributes.notes %>
-                            </div>
-
-                    </ul>
-                </div>
-                <br>
-                <hr>
         </div>
         <div class="col-xs-6">
-            <h2>Notes</h2>
-            <hr>
-            <ul class="onnotespage">
-
-
+            <div name="mdnotesonnotespg">
+                <h4>Doctor's Notes</h4>
+                <hr>
+                <ul>
                     <div class="<%= data.id %>">
-
-
-                            Date of Visit: <%= data.attributes.dateReadable %>
-                            </div>
-                            <div>
-                            Reason for Visit: <%= data.attributes.description %>
-                            </div>
-                            <div>
-                            Dr.'s Notes: <%=data.attributes.doctorNotes %>
-                            </div>
-                            <div>
-                                <p><a href="#notes/<%= data.id%>">more info...</a></p>
-                            </div>
+                        <%=data.attributes.doctorNotes %>
                     </div>
-                    <hr>
+                </ul>
+            </div>
+            <br>
+            <hr>
+            <div name="personalsavednotes">
+                <h4>Saved Personal Notes</h4>
+                <hr>
+                <ul>
+                    <div class="<%= data.id %>">
+                        <%=data.attributes.notes %>
+                    </div>
+                </ul>
+            </div>
 
-
-
-            </ul>
         </div>
     </div>
 </div>

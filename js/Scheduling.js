@@ -297,7 +297,7 @@
 
     Parse.PatientHomeView = Parse.TemplateView.extend({
         el: ".wrapper",
-        view: "bootstrap-patient-home",
+        view: "bootstrap-patient-home"
         // events: {
         //     // "click .listofappts a": "triggerApptDateHash",
         //     // "click .homenotes a": "triggerApptDateHash"
