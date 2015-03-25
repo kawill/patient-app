@@ -2,36 +2,6 @@
 (function(exports) {
     "use strict";
 
-    function scrollBodyTo(to, duration, callback) {
-        var start = window.scrollY,
-            change = to - start,
-            currentTime = 0,
-            increment = 20;
-
-        var animateScroll = function() {
-            currentTime += increment;
-            var val = Math.easeInOutQuad(currentTime, start, change, duration);
-            window.scrollTo(0, val);
-            if (currentTime <= duration) {
-                requestAnimationFrame(animateScroll);
-            } else {
-                callback && callback();
-            }
-        };
-        requestAnimationFrame(animateScroll);
-    }
-
-    //t = current time
-    //b = start value
-    //c = change in value
-    //d = duration
-    Math.easeInOutQuad = function(t, b, c, d) {
-        t /= d / 2;
-        if (t < 1) return c / 2 * t * t + b;
-        t--;
-        return -c / 2 * (t * (t - 2) - 1) + b;
-    };
-
     Parse.SchedulingRouter = Parse.Router.extend({
 
         initialize: function() {
@@ -58,20 +28,43 @@
             this.scheduleView = new Parse.ScheduleView();
             this.notesView = new Parse.NotesView();
             this.loginView = new Parse.LoginView();
+            this.logoutView = new Parse.LogoutView();
+            this.afterlogoutView = new Parse.AfterLogoutView();
 
             Parse.history.start();
         },
         routes: {
+            "login": "login",
+            "logout": "loadLogout",
+            "loggedout": "logoutcomplete",
+            "dashboard": "patienthome",
             "apptrequest": "loadApptrequest",
-            "schedule": "schedule",
-            "notes": "notes",
+            "notes/:noteId": "loadVistNotes",
+            // "schedule": "schedule",
+            // "notes": "notes",
             // "dashboard/*notes/:noteId": "loadVistNotes",
             // "dashboard/:id/notes/:noteId": "loadVistNotes",
-            "notes/:noteId": "loadVistNotes",
-            "login": "login",
             // "dashboard/:id": "patienthome",
-            "dashboard": "patienthome",
             "*default": "home"
+        },
+        login: function() {
+            this.loginView.render();
+        },
+        loadLogout: function() {
+            this.logoutView.render();
+        },
+        logoutcomplete: function() {
+            this.afterlogoutView.render();
+        },
+        patienthome: function() {
+            var self = this;
+            // self = router
+            this.appointments.fetch().then(function(collectionResult) {
+                // the result should be a Parse.Collection, hopefully
+                self.patientHomeView.collection = collectionResult;
+                self.patientHomeView.render();
+                // self because it needs to be a part of this model, new function
+            });
         },
         loadApptrequest: function() {
             var self = this;
@@ -82,12 +75,6 @@
                 self.apptRequestView.render();
                 // self because it needs to be a part of this model, new function
             });
-        },
-        schedule: function() {
-            this.scheduleView.render();
-        },
-        notes: function() {
-            this.notesView.render();
         },
         loadVistNotes: function(noteId) { //userId, noteId
             console.log(noteId + " passed to handler");
@@ -111,20 +98,12 @@
                 self.patientNotesView.render();
             });
         },
-
-        login: function() {
-            this.loginView.render();
-        },
-        patienthome: function() {
-            var self = this;
-            // self = router
-            this.appointments.fetch().then(function(collectionResult) {
-                // the result should be a Parse.Collection, hopefully
-                self.patientHomeView.collection = collectionResult;
-                self.patientHomeView.render();
-                // self because it needs to be a part of this model, new function
-            });
-        },
+        // schedule: function() {
+        //     this.scheduleView.render();
+        // },
+        // notes: function() {
+        //     this.notesView.render();
+        // },
         home: function() {
             this.homeView.render();
         }
@@ -272,7 +251,12 @@
 
 
             this.model.set('notes', this.el.querySelector(".savingpersonalnotes textarea[name='visitnotes']").value)
-            this.model.save()
+            this.model.save().then(function(data) {
+                console.log(data); //same as console.log(appointment) above
+                // id =appointment.id
+                console.log('save successful');
+                alert("Personal Note Saved");
+            });
 
             // var note = this.model({
 
@@ -308,7 +292,7 @@
             }
             var result = Parse.User.logIn(data.username, data.password); //documentation logIn vs login
             result.then(function(data) {
-                console.log(data)
+                // console.log(data)
                 window.location.hash = "#dashboard" //   +"/"+this.model.get('id')
             })
         },
@@ -332,6 +316,28 @@
                 window.location.hash = "#dashboard"
             })
         }
+    })
+
+    Parse.LogoutView = Parse.TemplateView.extend({
+        el:".wrapper",
+        view: "bootstrap-patient-logout",
+        events: {
+            "submit .patientLogout": "logout"
+        },
+        logout: function(event) {
+            event.preventDefault();
+            console.log(this);
+            Parse.User.logOut();
+            window.location.hash = "#loggedout";
+            // Parse.User.logOut().then(function(){
+            //     window.location.hash = "#loggedout"
+            // });
+        }
+    })
+
+    Parse.AfterLogoutView = Parse.TemplateView.extend({
+        el: ".wrapper",
+        view: "bootstrap-after-patient-logout"
     })
 
     Parse.PatientHomeView = Parse.TemplateView.extend({
