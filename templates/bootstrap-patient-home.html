@@ -13,7 +13,6 @@
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#dashboard">Dashboard</a></li>
                 <li><a href="#apptrequest">Schedule Appointments</a></li>
-                <li><a href="#notes">Notes</a></li>
                 <li><a href="#logout">Log Out</a></li>
             </ul>
         </div>
@@ -22,13 +21,13 @@
 </nav>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-xs-6">
+        <div class="col-xs-6 appt-home">
             <h2>Appointments</h2>
             <hr>
             <p><a class="btn bt-default btn-large btn-success scheduleappt" href="#apptrequest">Schedule New Appointment</a></p>
             <ul class="listofappts">
 
-                <% data.models.forEach(function(appt){ %>
+                <% data.each(function(appt){ %>
                     <div data-appt="<%= appt.id %>">
                             <div>
                             Date of Visit: <%= appt.get('dateReadable') %>
@@ -44,7 +43,7 @@
                 <%})%>
             </ul>
         </div>
-        <div class="col-xs-6">
+        <div class="col-xs-6 note-home">
             <h2>Notes</h2>
             <hr>
             <ul class="homenotes">

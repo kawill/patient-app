@@ -2,6 +2,36 @@
 (function(exports) {
     "use strict";
 
+    function scrollBodyTo(to, duration, callback) {
+        var start = window.scrollY,
+            change = to - start,
+            currentTime = 0,
+            increment = 20;
+
+        var animateScroll = function() {
+            currentTime += increment;
+            var val = Math.easeInOutQuad(currentTime, start, change, duration);
+            window.scrollTo(0, val);
+            if (currentTime <= duration) {
+                requestAnimationFrame(animateScroll);
+            } else {
+                callback && callback();
+            }
+        };
+        requestAnimationFrame(animateScroll);
+    }
+
+    //t = current time
+    //b = start value
+    //c = change in value
+    //d = duration
+    Math.easeInOutQuad = function(t, b, c, d) {
+        t /= d / 2;
+        if (t < 1) return c / 2 * t * t + b;
+        t--;
+        return -c / 2 * (t * (t - 2) - 1) + b;
+    };
+
     Parse.SchedulingRouter = Parse.Router.extend({
 
         initialize: function() {
@@ -40,7 +70,7 @@
             "notes/:noteId": "loadVistNotes",
             "login": "login",
             // "dashboard/:id": "patienthome",
-            "dashboard" : "patienthome",
+            "dashboard": "patienthome",
             "*default": "home"
         },
         loadApptrequest: function() {
@@ -60,7 +90,7 @@
             this.notesView.render();
         },
         loadVistNotes: function(noteId) { //userId, noteId
-            console.log(noteId+" passed to handler");
+            console.log(noteId + " passed to handler");
             // userId/notes passed not userId/notes/specific_noteId
             var self = this;
             // self = router
@@ -72,9 +102,11 @@
             // });
 
             // instead... maybe?
-            var model = new Parse.Appointment({ id: noteId });
+            var model = new Parse.Appointment({
+                id: noteId
+            });
             console.log(model);
-            model.fetch().then(function(){
+            model.fetch().then(function() {
                 self.patientNotesView.model = model;
                 self.patientNotesView.render();
             });
@@ -131,12 +163,16 @@
     // })
 
     Parse.AppointmentCollection = Parse.Collection.extend({
-        model: Parse.Appointment
+        model: Parse.Appointment,
+        comparator: function(a, b){
+            // return (a.get('date') > b.get('date')) ? 1 : -1 //most date last
+            return (a.get('date') < b.get('date')) ? 1 : -1 //upcoming, most recent date first
+        }
     })
 
     Parse.NotesCollection = Parse.Collection.extend({
         model: Parse.Appointment
-        // model: Parse.Note
+            // model: Parse.Note
     })
 
     Parse.ApptRequestView = Parse.TemplateView.extend({
@@ -176,18 +212,18 @@
 
             // console.log(dateArrayNumbers);
             var monthsArray = [
-            'Jan',
-            'Feb',
-            'Mar',
-            'Apr',
-            'May',
-            'Jun',
-            'Jul',
-            'Aug',
-            'Sep',
-            'Oct',
-            'Nov',
-            'Dec'
+                'Jan',
+                'Feb',
+                'Mar',
+                'Apr',
+                'May',
+                'Jun',
+                'Jul',
+                'Aug',
+                'Sep',
+                'Oct',
+                'Nov',
+                'Dec'
             ]
 
             var jsDate = new Date(dateArrayNumbers[0], dateArrayNumbers[1], dateArrayNumbers[2]);
@@ -229,27 +265,30 @@
         el: ".wrapper",
         view: "bootstrap-notes",
         events: {
-            "submit .savepersonalnotes": "savenotes"
+            "submit .savingpersonalnotes": "savenotes"
         },
         savenotes: function(event) {
             event.preventDefault();
-            var loggedInUser = Parse.User.current();
-            var acl = new Parse.ACL(loggedInUser);
-            var note = new Parse.Appointment({
-
-                notes: this.el.querySelector(".savepersonalnotes textarea[name='visitnotes']").value
-
-            });
 
 
-            console.log(note); //same as console.log(data) below
-            note.setACL(acl);
-            note.save().then(function(data) {
-                console.log(data); //same as console.log(appointment) above
-                // id =appointment.id
-                console.log('save successful');
-                alert("Personal Note Saved");
-            });
+            this.model.set('notes', this.el.querySelector(".savingpersonalnotes textarea[name='visitnotes']").value)
+            this.model.save()
+
+            // var note = this.model({
+
+            //     notes: this.el.querySelector(".savingpersonalnotes textarea[name='visitnotes']").value
+
+            // });
+
+
+            // console.log(note); //same as console.log(data) below
+            // note.setACL(acl);
+            // note.save().then(function(data) {
+            //     console.log(data); //same as console.log(appointment) above
+            //     // id =appointment.id
+            //     console.log('save successful');
+            //     alert("Personal Note Saved");
+            // });
 
         }
     })
@@ -298,28 +337,6 @@
     Parse.PatientHomeView = Parse.TemplateView.extend({
         el: ".wrapper",
         view: "bootstrap-patient-home"
-        // events: {
-        //     // "click .listofappts a": "triggerApptDateHash",
-        //     // "click .homenotes a": "triggerApptDateHash"
-        // },
-
-        // triggerApptDateHash: function(evt){
-        //     evt.preventDefault();
-        //     console.log(this);
-        //     // collection passed
-        //     var clickedApptModelId = $(evt.target).closest('[data-appt]').attr('data-appt')
-        //     // target for a tag and closest ancestor that has a data-appt attribute and return data-appt value
-        //     console.log(clickedApptModelId);
-        //     // gives ID of model
-        //     var filteredModel = this.collection.models.filter(function(model){
-        //         return model.id === clickedApptModelId
-        //     })
-        //     console.log(filteredModel);
-        //     // gives specific model
-        //     window.location.hash += "/notes/" + clickedApptModelId
-
-        // }
-
     })
 
     Parse.HomeView = Parse.TemplateView.extend({

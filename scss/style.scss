@@ -86,6 +86,30 @@ body {
  * SPECFIC
  */
 
-.button {
-
+.main-nav {
+    // margin-bottom: 0;
+}
+.main-home {
+    background-image: url(../images/healthcare_tech_1.jpg);
+    // min-height: 800px;
+    // background-size: cover;
+    background-size: cover;
+    background-position: center;
+    margin: 0;
+    // opacity: 0.7;
+    min-height: 45rem;
+    padding: 28rem 4rem;
+    text-align: center;
+    margin-top: -4rem;
+    color: #1CDDCE;
+}
+.main-p {
+    color: #1CDDCE;
+}
+.fa{
+    text-align: center;
+}
+.about-sect {
+    text-align: center;
+    padding: 8rem;
 }
