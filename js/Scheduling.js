@@ -140,7 +140,9 @@
             notes: "",
             doctorNotes: "",
             user: null,
-            occurred: false
+            occurred: false,
+            firstname: "",
+            lastname: ""
         },
         initialize: function() {
             this.on("change", function() {
@@ -303,7 +305,9 @@
             var data = {
                 username: this.el.querySelector(".patientRegister input[name='email']").value,
                 password: this.el.querySelector(".patientRegister input[name='password']").value,
-                passwordrepeat: this.el.querySelector(".patientRegister input[name='passwordrepeat']").value
+                passwordrepeat: this.el.querySelector(".patientRegister input[name='passwordrepeat']").value,
+                firstname: this.el.querySelector(".firstname input[name='firstname']").value,
+                lastname: this.el.querySelector(".firstname input[name='lastname']").value
             }
 
             var user = new Parse.User();

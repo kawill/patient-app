@@ -116,29 +116,91 @@ body {
     padding: 28rem 4rem;
     text-align: center;
     margin-top: -4rem;
-    color: black;
+    color: white;
+    text-shadow: 2px 2px 2px black;
+    // text-shadow: 2px 2px 2px white;
+    // color: white;
+    // text-shadow: 2px 2px 2px black;
+    // box-shadow: 2px 2px 2px 2px black;
+    // text-shadow: 10px 10px 10px black;
 }
 .main-home-text {
-    opacity: 1;
+    // opacity: 1;
+    // text-shadow: 2px 2px 2px 2px black;
+    background-color: black;
+    width: 47%;
+    opacity: .7;
+    border-radius: 10px;
+    h1 {
+        opacity: 1;
+    }
 }
+
 .main-p {
     // color: #1CDDCE;
 }
 .fa{
     text-align: center;
+    color: blue;
 }
 .about-sect {
     text-align: center;
     padding: 8rem;
+    background-color: #DCDCDC;
+    width: 100%;
 }
 .about-p{
-    padding: 8rem;
+    // padding: 8rem;
+    // width: 47%;
 }
 .features {
     padding: 8rem;
+    text-align: center;
+    // border: 1px solid black;
+}
+.patient-login {
+    // background-color: #DCDCDC;
+    // border-radius: 10px;
 }
 .login-register {
     // background-color: #FF00FF;
+    // margin: 45px auto 45px;
+    // padding: 50px;
+    // padding: 4 rem;
+    border: black;
+    border: 10px;
+    width: 60ch;
+    box-shadow: 0 0 10px black;
+    border-radius: 10px;
+    background-color: #DCDCDC;
+    padding-bottom: 3rem;
+    padding-top: 1rem;
+    padding-left: 4rem;
+    // font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    // font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.heading-style-apptrequest {
+    background-color: #DCDCDC;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+.heading-style-notes {
+    // background-color: #DCDCDC;
+    // border: 1px solid black;
+    // border-radius: 10px;
+    border: black;
+    border: 10px;
+    width: 60ch;
+    box-shadow: 0 0 10px black;
+    border-radius: 10px;
+    background-color: #DCDCDC;
+    padding-bottom: 3rem;
+    padding-top: 1rem;
+    padding-left: 4rem;
+}
+textarea {
+    border-radius: 10px;
 }
 // .appt-home-text {
 //     border: black;

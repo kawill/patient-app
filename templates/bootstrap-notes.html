@@ -24,63 +24,67 @@
         <!--/.navbar-collapse -->
     </div>
 </nav>
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-xs-12 col-md-12">
-            <div class="<%= data.id %> ">
-                <div>
-                    <h4>
-                        Date of Visit: <%=data.attributes.dateReadable %>
+<div>
+    <div class="container-fluid heading-style-notes">
+        <div class="row">
+            <div class="col-xs-12 col-md-12">
+                <div class="<%= data.id %> ">
+                    <div>
+                        <h4>
+                        Date of Visit: <%=data.attributes.dateReadable%>
                         </h4>
-                </div>
-                <div>
-                    <h4>
+                    </div>
+                    <div>
+                        <h4>
                         Reason for Visit: <%= data.attributes.apptName %>
                         </h4>
+                    </div>
+                </div>
+                <hr>
+            </div>
+            <div class="col-xs-12 col-md-6">
+                <div class="<%= data.id %>">
+                    <form class="horizontal-form savingpersonalnotes">
+                        <textarea placeholder="Enter Your Notes" name="visitnotes" style="width: 35rem; height: 28rem">
+                            <%=data.get( 'notes')%>
+                        </textarea>
+                        <br>
+                        <br>
+                        <div>
+                            <p>
+                                <button type="submit" class="btn bt-default btn-large btn-success savepersonalnotes">SAVE</button>
+                            </p>
+                        </div>
+                    </form>
                 </div>
             </div>
-            <hr>
-        </div>
-        <div class="col-xs-12 col-md-6">
-            <div class="<%= data.id %>">
-                <form class="horizontal-form savingpersonalnotes">
-                    <textarea placeholder="Enter Your Notes" name="visitnotes" style="width: 35rem; height: 28rem;">
-                        <%=data.get( 'notes') %>
-                    </textarea>
-                    <br>
-                    <br>
-                    <div>
-                        <p>
-                            <button type="submit" class="btn bt-default btn-large btn-success savepersonalnotes">SAVE</button>
-                        </p>
-                    </div>
-                </form>
-            </div>
-        </div>
-        <div class="col-xs-12 col-md-6">
-            <div class="<%= data.id %>">
-                <h4>Doctor's Notes</h4>
+            <div class="col-xs-12 col-md-6">
+                <div class="<%= data.id %>">
+                    <h4>Doctor's Notes</h4>
+                    <hr>
+                    <ul>
+                        <div class="<%= data.id %>">
+                            <%=data.attributes.doctorNotes %>
+                        </div>
+                    </ul>
+                </div>
+                <br>
                 <hr>
-                <ul>
-                    <div class="<%= data.id %>">
-                        <%=data.attributes.doctorNotes %>
-                    </div>
-                </ul>
-            </div>
-            <br>
-            <hr>
-            <div class="<%= data.id %>">
-                <h4>Concern's to Address</h4>
-                <hr>
-                <ul>
-                    <div class="<%= data.id %>">
-                        <%=data.attributes.description %>
-                    </div>
-                </ul>
+                <div class="<%= data.id %>">
+                    <h4>Concern's to Address</h4>
+                    <hr>
+                    <ul>
+                        <div class="<%= data.id %>">
+                            <%=data.attributes.description %>
+                        </div>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
 </div>
+<br>
+<hr>
 <div class="container-fluid">
     <!-- Example row of columns -->
     <hr>
