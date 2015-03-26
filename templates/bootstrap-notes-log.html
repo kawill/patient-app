@@ -26,36 +26,23 @@
 </nav>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-xs-12 col-md-6">
-            <form class="horizontal-form sendrequest">
-                <label>Enter Date You Would Like to be Seen:</label>
-                <input type="date" name="apptdate" required class="form-control" style="width: 35rem">
-                <br>
-                <input type="text" name="apptname" placeholder="Reason for Visit" required class="form-control" style="width: 35rem">
-                <br>
-                <textarea placeholder="Specific Concerns to Address" name="concerns" style="width: 35rem; height: 20rem;"></textarea>
-                <br>
-                <br>
-                <div>
-                    <p>
-                        <button type="submit" class="btn bt-default btn-large btn-success sendrequestbtn" href="#dashboard">SEND</button>
-                    </p>
-                </div>
-            </form>
-        </div>
-        <div class="col-xs-12 col-md-6">
-            <h2>Appointments</h2>
+        <div class="col-xs-12 col-md-12">
+            <h2>Notes</h2>
             <hr>
             <ul class="listofappts">
                 <% data.models.forEach(function(appointments){ %>
                     <div class="<%= appointments.id %>">
                         <div>
                             Date of Visit:
-                            <%=appointments.get('dateReadable') %>
+                            <%=appointments.get( 'dateReadable') %>
                         </div>
                         <div>
                             Reason for Visit:
-                            <%=appointments.get('apptName') %>
+                            <%=appointments.get( 'apptName') %>
+                        </div>
+                        <div>
+                            Doctor Notes:
+                            <%=appointments.get( 'doctorNotes') %>
                         </div>
                         <div>
                             <p><a href="#notes/<%= appointments.id%>">see or make personal notes...</a></p>

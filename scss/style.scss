@@ -90,9 +90,24 @@ body {
     // margin-bottom: 0;
 }
 .main-home {
-    background-image: url(../images/healthcare_tech_1.jpg);
+    // background-image: url(../images/healthcare_tech_1.jpg);
+    // background-image: url(../images/healthcare_tech_1differentfilter.jpg);
+    // background-image: url(../images/healthcare_tech_2.jpg);
+    // background-image: url(../images/healthcare_tech_iPadHealth.jpeg);
+    // background-image: url(../images/healthcare_tech_iPadHealth2.jpeg);
+    // background-image: url(../images/healthtechlightkeyboard.png);
+    background-image: url(../images/healthtechbuttononkeyboard.jpg);
+    // background-image: url(../images/healthtechdarkkeyboard.jpg);
+    // background-image: url(../images/lightkeyboardstethfromright.jpg);
+    // background-image: url(../images/lightkeyboardstethfromleft.jpg);
+    // background-image: url(../images/stethfocus.jpg);
     // min-height: 800px;
     // background-size: cover;
+    // transition: opacity ease-in-out 0.7s;
+    // z-index: 2;
+    // overflow: hidden !important;
+    // background-color: #000000;
+    // opacity: 0.7;
     background-size: cover;
     background-position: center;
     margin: 0;
@@ -101,10 +116,13 @@ body {
     padding: 28rem 4rem;
     text-align: center;
     margin-top: -4rem;
-    color: #1CDDCE;
+    color: black;
+}
+.main-home-text {
+    opacity: 1;
 }
 .main-p {
-    color: #1CDDCE;
+    // color: #1CDDCE;
 }
 .fa{
     text-align: center;
@@ -112,6 +130,15 @@ body {
 .about-sect {
     text-align: center;
     padding: 8rem;
+}
+.about-p{
+    padding: 8rem;
+}
+.features {
+    padding: 8rem;
+}
+.login-register {
+    // background-color: #FF00FF;
 }
 // .appt-home-text {
 //     border: black;

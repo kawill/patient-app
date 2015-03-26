@@ -16,6 +16,11 @@
             this.apptRequestView = new Parse.ApptRequestView({
                 collection: this.appointments
             });
+            this.notesLog = new Parse.NotesCollectionLog();
+            this.notesView = new Parse.NotesView({
+                collection: this.notesLog
+            });
+
             this.patientHomeView = new Parse.PatientHomeView({
                 collection: this.appointments
             });
@@ -41,7 +46,7 @@
             "apptrequest": "loadApptrequest",
             "notes/:noteId": "loadVistNotes",
             // "schedule": "schedule",
-            // "notes": "notes",
+            "notes": "loadNotesLog",
             // "dashboard/*notes/:noteId": "loadVistNotes",
             // "dashboard/:id/notes/:noteId": "loadVistNotes",
             // "dashboard/:id": "patienthome",
@@ -75,6 +80,13 @@
                 self.apptRequestView.render();
                 // self because it needs to be a part of this model, new function
             });
+        },
+        loadNotesLog: function(){
+            var self = this;
+            this.notes.fetch().then(function(collectionofNotes) {
+                self.notesView.collection = collectionofNotes;
+                self.notesView.render();
+            })
         },
         loadVistNotes: function(noteId) { //userId, noteId
             console.log(noteId + " passed to handler");
@@ -123,6 +135,7 @@
             date: new Date(1970, 0, 0),
             dateReadable: "",
             description: "",
+            apptName: "",
             id: "",
             notes: "",
             doctorNotes: "",
@@ -150,6 +163,11 @@
     })
 
     Parse.NotesCollection = Parse.Collection.extend({
+        model: Parse.Appointment
+            // model: Parse.Note
+    })
+
+    Parse.NotesCollectionLog = Parse.Collection.extend({
         model: Parse.Appointment
             // model: Parse.Note
     })
@@ -214,6 +232,7 @@
             var appointment = new Parse.Appointment({
                 date: jsDate,
                 description: this.el.querySelector(".sendrequest textarea[name='concerns']").value,
+                apptName: this.el.querySelector(".sendrequest input[name='apptname']").value,
                 dateReadable: dateReadableString
             });
 
@@ -237,7 +256,7 @@
 
     Parse.NotesView = Parse.TemplateView.extend({
         el: ".wrapper",
-        view: "notes"
+        view: "bootstrap-notes-log"
     })
 
     Parse.PatientNotesView = Parse.TemplateView.extend({
@@ -257,23 +276,6 @@
                 console.log('save successful');
                 alert("Personal Note Saved");
             });
-
-            // var note = this.model({
-
-            //     notes: this.el.querySelector(".savingpersonalnotes textarea[name='visitnotes']").value
-
-            // });
-
-
-            // console.log(note); //same as console.log(data) below
-            // note.setACL(acl);
-            // note.save().then(function(data) {
-            //     console.log(data); //same as console.log(appointment) above
-            //     // id =appointment.id
-            //     console.log('save successful');
-            //     alert("Personal Note Saved");
-            // });
-
         }
     })
 

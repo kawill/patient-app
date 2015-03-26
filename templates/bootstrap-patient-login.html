@@ -13,58 +13,55 @@
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#">Home</a></li>
                 <li><a href="#login">Log In</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#faq">FAQ</a></li>
+                <!--<li><a href="#about">About</a></li>
+                <li><a href="#features">Features</a></li>-->
             </ul>
         </div>
         <!--/.navbar-collapse -->
     </div>
 </nav>
-
 <!-- Main jumbotron for a primary marketing message or call to action -->
-<div class="jumbotron">
-    <div class="container-fluid patient-Login">
-        <p>Log in with your email:</p>
+<div class= "login-register">
+    <div class="container-fluid patient-Login col-xs-12 col-md-6">
+        <h3><p>Log in with your email:</p></h3>
         <form class="horizontal-form patientLogin">
             <div class="form-group">
-                <input type="text" placeholder="Email" class="form-control" name="email" required>
+                <input type="text" placeholder="Email" class="form-control" name="email" required style="width: 35rem">
             </div>
             <div class="form-group">
-                <input type="password" name="password" required placeholder="Password" class="form-control">
+                <input type="password" name="password" required placeholder="Password" class="form-control" style="width: 35rem">
             </div>
             <button type="submit" class="btn btn-success">Sign In</button>
         </form>
     </div>
-
-    <hr>
-
-    <div class="container-fluid patient-Login">
-        <p>If you do not have an account, please register here:</p>
+    <div class="container-fluid patient-Login col-xs-12 col-md-6">
+        <h3><p>If you do not have an account, please register here:</p></h3>
         <form class="horizontal-form patientRegister">
             <div class="form-group">
-                <input type="text" placeholder="Email" class="form-control" name="email" required>
+                <input type="text" placeholder="Email" class="form-control" name="email" required style="width: 35rem">
             </div>
             <div class="form-group">
-                <input type="password" name="password" required placeholder="Password" class="form-control">
+                <input type="password" name="password" required placeholder="Password" class="form-control" style="width: 35rem">
             </div>
             <div class="form-group">
-                <input type="password" name="passwordrepeat" required placeholder="Repeat password" class="form-control">
+                <input type="password" name="passwordrepeat" required placeholder="Repeat password" class="form-control" style="width: 35rem">
             </div>
             <div class="form-group">
-                <input type="text" name="firstname" required placeholder="First Name" class="form-control">
+                <input type="text" name="firstname" required placeholder="First Name" class="form-control" style="width: 35rem">
             </div>
             <div class="form-group">
-                <input type="text" name="lastname" required placeholder="Last Name" class="form-control">
+                <input type="text" name="lastname" required placeholder="Last Name" class="form-control" style="width: 35rem">
             </div>
             <div class="form-group">
                 <label>Enter Date of Birth:</label>
-                <input type="date" name="dob" required class="form-control">
+                <input type="date" name="dob" required class="form-control" style="width: 35rem">
             </div>
             <button type="submit" class="btn btn-success">Register</button>
         </form>
     </div>
 </div>
-
+<br>
+<hr>
 <div class="container-fluid">
     <footer>
         <p>© CliniSchedule 2015</p>

@@ -7,12 +7,14 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">CliniScheduler</a>
+            <a class="navbar-brand" href="#dashboard">CliniScheduler</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#dashboard">Dashboard</a></li>
                 <li><a href="#apptrequest">Schedule Appointments</a></li>
+                <li><a href="#notes">Notes</a>
+                </li>
                 <li><a href="#logout">Log Out</a></li>
             </ul>
         </div>
@@ -23,46 +25,47 @@
     <div class="row">
         <div class="col-xs-6 appt-home">
             <div class="appt-home-text">
-            <h2 >Appointments</h2>
-
-            <hr>
+                <h2>Appointments</h2>
+                <hr>
             </div>
             <p><a class="btn bt-default btn-large btn-success scheduleappt" href="#apptrequest">Schedule New Appointment</a></p>
             <ul class="listofappts">
-
                 <% data.each(function(appt){ %>
                     <div data-appt="<%= appt.id %>">
-                            <div>
-                            Date of Visit: <%= appt.get('dateReadable') %>
-                            </div>
-                            <div>
-                            Reason for Visit: <%= appt.get('description') %>
-                            </div>
-                            <div>
-                                <p><a href="#notes/<%= appt.id %>" >see or make personal notes...</a></p>
-                            </div>
+                        <div>
+                            Date of Visit:
+                            <%=appt.get('dateReadable') %>
+                        </div>
+                        <div>
+                            Reason for Visit:
+                            <%=appt.get('apptName') %>
+                        </div>
+                        <div>
+                            <p><a href="#notes/<%= appt.id %>">see or make personal notes...</a></p>
+                        </div>
                     </div>
                     <hr>
-                <%})%>
+                    <%})%>
             </ul>
         </div>
         <div class="col-xs-6 note-home">
             <h2>Notes</h2>
             <hr>
             <ul class="homenotes">
-
                 <% data.models.forEach(function(notes){ %>
                     <div data-notes="<%= notes.id %>">
-
-                            <%if(!notes.get('doctorNotes')){return} else{%>
+                        <%if(!notes.get( 'doctorNotes')){return} else{%>
                             <div>
-                            Date of Visit: <%=notes.get('dateReadable')%>
+                                Date of Visit:
+                                <%=notes.get( 'dateReadable')%>
                             </div>
                             <div>
-                            Reason for Visit: <%=notes.get('description') %>
+                                Reason for Visit:
+                                <%=notes.get( 'apptName') %>
                             </div>
                             <div>
-                            Dr.'s Notes: <%=notes.get('doctorNotes')%>
+                                Dr.'s Notes:
+                                <%=notes.get( 'doctorNotes')%>
                             </div>
                             <div>
                                 <p><a href="#notes/<%= notes.id %>">more info...</a></p>
@@ -70,8 +73,7 @@
                     </div>
                     <hr>
                     <%}%>
-                <%})%>
-
+                        <%})%>
             </ul>
         </div>
     </div>
