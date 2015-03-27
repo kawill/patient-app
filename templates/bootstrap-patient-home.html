@@ -24,15 +24,16 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-xs-12 appt-home-name">
-            <div class= "<%= data.id%>">
-            <% console.log(data) %>
-            <p>
-            Welcome <%=data.get('firstname')%>
-            </p>
+            <div class="<%= data.id%>">
+
+                    <p>
+
+
+                    </p>
             </div>
         </div>
-        <div class="col-xs-6 appt-home">
-            <div class="appt-home-text">
+        <div class="col-xs-12 col-md-6 appt-home">
+            <div class="appt-home-heading">
                 <h2>Appointments</h2>
                 <hr>
             </div>
@@ -41,12 +42,12 @@
                 <% data.each(function(appt){ %>
                     <div data-appt="<%= appt.id %>">
                         <div>
-                            Date of Visit:
-                            <%=appt.get('dateReadable') %>
+                            <strong>Date of Visit:</strong>
+                            <%=appt.get( 'dateReadable') %>
                         </div>
                         <div>
-                            Reason for Visit:
-                            <%=appt.get('apptName') %>
+                            <strong>Reason for Visit:</strong>
+                            <%=appt.get( 'apptName') %>
                         </div>
                         <div>
                             <p><a href="#notes/<%= appt.id %>">see or make personal notes...</a></p>
@@ -56,23 +57,25 @@
                     <%})%>
             </ul>
         </div>
-        <div class="col-xs-6 note-home">
-            <h2>Notes</h2>
-            <hr>
+        <div class="col-xs-12 col-md-6 note-home">
+            <div class="note-home-heading">
+                <h2>Notes from Provider</h2>
+                <hr>
+            </div>
             <ul class="homenotes">
                 <% data.models.forEach(function(notes){ %>
                     <div data-notes="<%= notes.id %>">
                         <%if(!notes.get( 'doctorNotes')){return} else{%>
                             <div>
-                                Date of Visit:
+                                <strong>Date of Visit:</strong>
                                 <%=notes.get( 'dateReadable')%>
                             </div>
                             <div>
-                                Reason for Visit:
+                                <strong>Reason for Visit:</strong>
                                 <%=notes.get( 'apptName') %>
                             </div>
                             <div>
-                                Dr.'s Notes:
+                                <strong>Dr.'s Notes:</strong>
                                 <%=notes.get( 'doctorNotes')%>
                             </div>
                             <div>

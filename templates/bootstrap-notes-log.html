@@ -24,28 +24,28 @@
         <!--/.navbar-collapse -->
     </div>
 </nav>
-<div class="container-fluid">
+<div class="container-fluid heading-style-notes">
     <div class="row">
         <div class="col-xs-12 col-md-12">
             <h2>Notes</h2>
             <hr>
-            <ul class="listofappts">
-                <% data.models.forEach(function(appointments){ %>
-                    <div class="<%= appointments.id %>">
+            <ul class="listofnotes">
+                <% data.models.forEach(function(notes){ %>
+                    <div class="<%= notes.id %>">
                         <div>
                             Date of Visit:
-                            <%=appointments.get( 'dateReadable') %>
+                            <%=notes.get('dateReadable')%>
                         </div>
                         <div>
                             Reason for Visit:
-                            <%=appointments.get( 'apptName') %>
+                            <%=notes.get( 'apptName') %>
                         </div>
                         <div>
                             Doctor Notes:
-                            <%=appointments.get( 'doctorNotes') %>
+                            <%=notes.get( 'doctorNotes') %>
                         </div>
                         <div>
-                            <p><a href="#notes/<%= appointments.id%>">see or make personal notes...</a></p>
+                            <p><a href="#notes/<%= notes.id%>">see or make personal notes...</a></p>
                         </div>
                     </div>
                     <hr>

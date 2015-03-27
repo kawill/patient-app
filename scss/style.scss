@@ -90,17 +90,7 @@ body {
     // margin-bottom: 0;
 }
 .main-home {
-    // background-image: url(../images/healthcare_tech_1.jpg);
-    // background-image: url(../images/healthcare_tech_1differentfilter.jpg);
-    // background-image: url(../images/healthcare_tech_2.jpg);
-    // background-image: url(../images/healthcare_tech_iPadHealth.jpeg);
-    // background-image: url(../images/healthcare_tech_iPadHealth2.jpeg);
-    // background-image: url(../images/healthtechlightkeyboard.png);
     background-image: url(../images/healthtechbuttononkeyboard.jpg);
-    // background-image: url(../images/healthtechdarkkeyboard.jpg);
-    // background-image: url(../images/lightkeyboardstethfromright.jpg);
-    // background-image: url(../images/lightkeyboardstethfromleft.jpg);
-    // background-image: url(../images/stethfocus.jpg);
     // min-height: 800px;
     // background-size: cover;
     // transition: opacity ease-in-out 0.7s;
@@ -134,6 +124,7 @@ body {
     h1 {
         opacity: 1;
     }
+    margin-left: 32rem;
 }
 
 .main-p {
@@ -184,11 +175,14 @@ body {
     background-color: #DCDCDC;
     border: 1px solid black;
     border-radius: 10px;
+    box-shadow: 0 0 10px black;
+    padding-left: 4rem;
 }
 .heading-style-notes {
     // background-color: #DCDCDC;
     // border: 1px solid black;
     // border-radius: 10px;
+    margin: 45px auto 45px;
     border: black;
     border: 10px;
     width: 60ch;
@@ -202,18 +196,89 @@ body {
 textarea {
     border-radius: 10px;
 }
-// .appt-home-text {
-//     border: black;
-//     box-shadow: 0 0 10px black; //box-shadow: 0 0 10px #000;
-//     border-radius: 10px;
-// }
-// .appt-home {
+.style-apptrequest {
+    margin: 4rem;
+}
+.appt-home-heading {
+    border: black;
+    box-shadow: 0 0 10px black;
+    border-radius: 10px;
+    padding-left: 2rem;
+    padding-top: 0.5rem;
+    background-color: #DCDCDC;
+    margin: 0px;
+    text-align: center;
+}
+.note-home-heading {
+    border: black;
+    box-shadow: 0 0 10px black;
+    border-radius: 10px;
+    padding-left: 2rem;
+    padding-top: 0.5rem;
+    background-color: #DCDCDC;
+    margin: 0px;
+    text-align: center;
+}
+.appt-home {
     // border: black;
     // box-shadow: 0 0 10px black; //box-shadow: 0 0 10px #000;
     // border-radius: 10px;
-// }
-// .note-home {
-//     border: black;
-//     box-shadow: 0 0 10px black; //box-shadow: 0 0 10px #000;
-//     border-radius: 10px;
-// }
+    padding-bottom: 3rem;
+    padding-top: 1rem;
+    padding-left: 4rem;
+    padding-right: 2rem;
+}
+.note-home {
+    // border: black;
+    // box-shadow: 0 0 10px black; //box-shadow: 0 0 10px #000;
+    // border-radius: 10px;
+    padding-bottom: 3rem;
+    padding-top: 1rem;
+    padding-right: 4rem;
+    padding-left: 2rem;
+}
+.notepg-overall {
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+.note-pg {
+    border: black;
+    box-shadow: 0 0 10px black;
+    border-radius: 10px;
+    padding-left: 2rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    background-color: #DCDCDC;
+    margin: 0px;
+    text-align: center;
+}
+.notesmd {
+    // padding-bottom: 3rem;
+    // padding-top: 1rem;
+    // padding-left: 4rem;
+    // padding-right: 2rem;
+    border: black;
+    box-shadow: 0 0 10px black;
+    border-radius: 10px;
+    // padding-left: 2rem;
+    // padding-top: 0.5rem;
+    background-color: #DCDCDC;
+    margin: 0px;
+    text-align: center;
+    padding-top: 1rem;
+}
+.concernsformd {
+    // padding-bottom: 3rem;
+    // padding-top: 1rem;
+    // padding-left: 4rem;
+    // padding-right: 2rem;
+    border: black;
+    box-shadow: 0 0 10px black;
+    border-radius: 10px;
+    // padding-left: 2rem;
+    // padding-top: 0.5rem;
+    background-color: #DCDCDC;
+    margin: 0px;
+    text-align: center;
+    padding-top: 1rem;
+}

@@ -165,7 +165,10 @@
     })
 
     Parse.NotesCollection = Parse.Collection.extend({
-        model: Parse.Appointment
+        model: Parse.Appointment,
+        comparator: function(a, b){
+            return (a.get('date') < b.get('date')) ? 1 : -1 //upcoming, most recent date first
+        }
             // model: Parse.Note
     })
 

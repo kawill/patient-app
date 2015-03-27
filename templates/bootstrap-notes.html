@@ -25,18 +25,18 @@
     </div>
 </nav>
 <div>
-    <div class="container-fluid heading-style-notes">
+    <div class="container-fluid notepg-overall">
         <div class="row">
             <div class="col-xs-12 col-md-12">
-                <div class="<%= data.id %> ">
+                <div class="<%= data.id %> note-pg">
                     <div>
                         <h4>
-                        Date of Visit: <%=data.attributes.dateReadable%>
+                        <strong>Date of Visit:</strong> <%=data.attributes.dateReadable%>
                         </h4>
                     </div>
                     <div>
                         <h4>
-                        Reason for Visit: <%= data.attributes.apptName %>
+                        <strong>Reason for Visit:</strong> <%= data.attributes.apptName %>
                         </h4>
                     </div>
                 </div>
@@ -60,8 +60,10 @@
             </div>
             <div class="col-xs-12 col-md-6">
                 <div class="<%= data.id %>">
+                    <div class="notesmd">
                     <h4>Doctor's Notes</h4>
                     <hr>
+                    </div>
                     <ul>
                         <div class="<%= data.id %>">
                             <%=data.attributes.doctorNotes %>
@@ -71,8 +73,10 @@
                 <br>
                 <hr>
                 <div class="<%= data.id %>">
-                    <h4>Concern's to Address</h4>
+                    <div class="concernsformd">
+                    <h4>Concerns to Address</h4>
                     <hr>
+                    </div>
                     <ul>
                         <div class="<%= data.id %>">
                             <%=data.attributes.description %>
@@ -83,8 +87,7 @@
         </div>
     </div>
 </div>
-<br>
-<hr>
+
 <div class="container-fluid">
     <!-- Example row of columns -->
     <hr>
