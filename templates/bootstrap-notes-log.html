@@ -45,7 +45,11 @@
                             <%=notes.get( 'doctorNotes') %>
                         </div>
                         <div>
-                            <p><a href="#notes/<%= notes.id%>">see or make personal notes...</a></p>
+                            Doctor Notes:
+                            <%=notes.get( 'notes') %>
+                        </div>
+                        <div>
+                            <p><a href="#notes/<%= notes.id%>">make personal notes...</a></p>
                         </div>
                     </div>
                     <hr>
