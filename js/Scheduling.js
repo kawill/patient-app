@@ -309,8 +309,8 @@
                 username: this.el.querySelector(".patientRegister input[name='email']").value,
                 password: this.el.querySelector(".patientRegister input[name='password']").value,
                 passwordrepeat: this.el.querySelector(".patientRegister input[name='passwordrepeat']").value,
-                firstname: this.el.querySelector(".firstname input[name='firstname']").value,
-                lastname: this.el.querySelector(".firstname input[name='lastname']").value
+                firstname: this.el.querySelector(".patientRegister input[name='firstname']").value,
+                lastname: this.el.querySelector(".patientRegister input[name='lastname']").value
             }
 
             var user = new Parse.User();
@@ -362,8 +362,15 @@
     // window.testData = function(){
     //     var loggedInUser = Parse.User.current()
     //     var testAppointment = new Parse.Appointment({
-    //         date: new Date("March 27, 2015 9:00:00"),
-    //         description: "upper respiratory..."
+    //         // date: new Date("March 27, 2015 9:00:00"),
+    //         // description: "upper respiratory..."
+    //       // })
+    //attempt to populate
+    //         dateReadable: new Date ("Apr 10 2014"),
+    //         apptName: "2 Weeks - First Visit",
+    //         description: "She is spitting up a lot",
+    //         notes: "Watch for fever > 100.4°F (ax)",
+    //         doctorNotes: "2-3 oz every 3-4 hrs, burp frequently (after every oz), monitor temp, next visit in 2 wks"
     //     })
     //     var acl = new Parse.ACL(loggedInUser);
     //     testAppointment.setACL(acl);
