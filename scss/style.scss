@@ -118,13 +118,13 @@ body {
     // opacity: 1;
     // text-shadow: 2px 2px 2px 2px black;
     background-color: black;
-    width: 47%;
+    // width: 47%;
     opacity: .7;
     border-radius: 10px;
     h1 {
         opacity: 1;
     }
-    margin-left: 32rem;
+    // margin-left: 32rem;
 }
 
 .main-p {
@@ -136,11 +136,20 @@ body {
 }
 .about-sect {
     text-align: center;
-    padding: 8rem;
+    // padding: 8rem;
     background-color: #DCDCDC;
-    width: 100%;
+    // width: 100%;
+    hr {
+        border-color: black;
+        width: 25%;
+    }
+    h2 {
+        padding-top: 3rem;
+    }
 }
 .about-p{
+    font-size: 2rem;
+    padding-bottom: 5rem;
     // padding: 8rem;
     // width: 47%;
 }
